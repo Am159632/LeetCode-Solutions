@@ -1,23 +1,23 @@
 class Solution {
     public boolean isValidSudoku(char[][] board) {
+        Map<Integer,Set<Character>> rows = new HashMap<>();
+        Map<Integer,Set<Character>> cols = new HashMap<>();
+        Map<Integer,Set<Character>> blocks = new HashMap<>();
+        for(int i=0;i<board.length;i++){
+            rows.put(i,new HashSet<>());
+            cols.put(i,new HashSet<>());
+            blocks.put(i,new HashSet<>());
+        }
         for(int i=0;i<board.length;i++){
             for(int j=0;j<board[0].length;j++){
-                if(board[i][j]!='.'){
-                    for(int k=0;k<board.length;k++){
-                        if(k!=i && board[i][j]==board[k][j]) return false;
-                        if(k!=j && board[i][j]==board[i][k]) return false;
-                    }
-                    int row=(i/3)*3,col=(j/3)*3;
-                    for(int k=row;k<row+3;k++){
-                        for(int t=col;t<col+3;t++){
-                            if(k!=i || t!=j){
-                                if(board[i][j]==board[k][t]) return false;
-                            }
-                        }
-                    }
+                char num=board[i][j];
+                if(num!='.'){
+                     if(!rows.get(i).add(num) ||
+                     !cols.get(j).add(num) ||
+                     !blocks.get((i/3)*3+j/3).add(num)) return false;
                 }
-            }   
+            }
         }
         return true;
-    }
+}
 }
