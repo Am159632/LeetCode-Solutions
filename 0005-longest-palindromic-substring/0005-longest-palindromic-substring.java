@@ -19,33 +19,29 @@ class Solution {
         }
         return s.substring(maxI,maxJ+1);
     }
-    public String longestPalindrome(String s){
-        int start=0,max=0;
-        for(int k=0;k<s.length();k++){
-            int i=k,j=k;
-            while(i>=0 && j<s.length() && s.charAt(i)==s.charAt(j)){
-                i--;
-                j++;
-            }
+    public String longestPalindrome(String s) {
+        if (s == null || s.length() < 1) return "";
+        int start = 0, max = 0;
+        
+        for (int k = 0; k < s.length(); k++) {
+            int len1 = expand(s, k, k);
+            int len2 = expand(s, k, k + 1);
             
-            if(j-i-1>max){
-                max=j-i-1;
-                start=i+1;
+            int len = Math.max(len1, len2);
+            
+            if (len > max) {
+                max = len;
+                start = k - (len - 1) / 2;
             }
         }
-
-         for(int k=0;k<s.length();k++){
-            int i=k,j=k+1;
-            while(i>=0 && j<s.length() && s.charAt(i)==s.charAt(j)){
-                i--;
-                j++;
-            }
-           if(j-i-1>max){
-                max=j-i-1;
-                start=i+1;
-            }
-                
+        
+        return s.substring(start, start + max);
+    }
+    private int expand(String s, int i, int j) {
+        while (i >= 0 && j < s.length() && s.charAt(i) == s.charAt(j)) {
+            i--;
+            j++;
         }
-        return s.substring(start,start+max);
+        return j - i - 1; // הנוסחה המנצחת שלך
     }
 }
