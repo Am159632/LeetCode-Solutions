@@ -42,6 +42,6 @@ class Solution {
             i--;
             j++;
         }
-        return j - i - 1; // הנוסחה המנצחת שלך
+        return j - i - 1;
     }
 }
