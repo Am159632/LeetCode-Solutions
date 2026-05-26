@@ -1,5 +1,5 @@
 class Solution {
-    public String longestPalindrome(String s) {
+    public String longestPalindrome1(String s) {
         int[][]d=new int[s.length()][s.length()];
         for(int i=0;i<s.length();i++)d[i][i]=1;
         for(int i=s.length()-1;i>=0;i--){
@@ -18,5 +18,34 @@ class Solution {
             }
         }
         return s.substring(maxI,maxJ+1);
+    }
+    public String longestPalindrome(String s){
+        int start=0,max=0;
+        for(int k=0;k<s.length();k++){
+            int i=k,j=k;
+            while(i>=0 && j<s.length() && s.charAt(i)==s.charAt(j)){
+                i--;
+                j++;
+            }
+            
+            if(j-i-1>max){
+                max=j-i-1;
+                start=i+1;
+            }
+        }
+
+         for(int k=0;k<s.length();k++){
+            int i=k,j=k+1;
+            while(i>=0 && j<s.length() && s.charAt(i)==s.charAt(j)){
+                i--;
+                j++;
+            }
+           if(j-i-1>max){
+                max=j-i-1;
+                start=i+1;
+            }
+                
+        }
+        return s.substring(start,start+max);
     }
 }
