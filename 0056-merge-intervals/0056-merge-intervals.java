@@ -5,10 +5,8 @@ class Solution {
         res[0] = new int[]{intervals[0][0], intervals[0][1]};
         int k=0;
         for(int i=1;i<intervals.length;i++){
-            if(intervals[i][0]<=res[k][1]){
-                if(res[k][1]<=intervals[i][1])
+            if(intervals[i][0]<=res[k][1])
                     res[k][1]=Math.max(res[k][1],intervals[i][1]);
-            }
             else{
                 k++;
                 res[k] = new int[]{intervals[i][0], intervals[i][1]};
