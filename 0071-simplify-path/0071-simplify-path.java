@@ -1,6 +1,6 @@
 class Solution {
     public String simplifyPath(String path) {
-        LinkedList<String> list = new LinkedList<>();
+        ArrayDeque<String> list = new ArrayDeque<>();
         String[] words=path.split("/");
         for(int i=0;i<words.length;i++){
             if(!(words[i].isEmpty() || words[i].equals("/") || words[i].equals("."))){
