@@ -5,7 +5,14 @@ class Solution {
 
         for(int i=0;i<grid.length;i++){
             for(int j=0;j<grid[0].length;j++){
-                if(grid[i][j]==1) max = Math.max(max,dfs(grid, i, j));
+                if(grid[i][j]==1) //max= Math.max(max,dfs(grid, i, j)); 
+                    grid[i][j]=dfs(grid,i,j);
+            }
+        }
+
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(max<grid[i][j]) max=grid[i][j];
             }
         }
         return max;
