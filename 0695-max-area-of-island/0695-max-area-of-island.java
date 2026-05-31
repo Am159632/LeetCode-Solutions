@@ -5,6 +5,17 @@ class Solution {
 
         for(int i=0;i<grid.length;i++){
             for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j]==1) max=Math.max(max,dfs(grid,i,j));
+            }
+        }
+        return max;
+    }
+    public int maxAreaOfIsland1(int[][] grid) {
+        if (grid == null || grid.length == 0) return 0;
+        int max=0;
+
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
                 if(grid[i][j]==1) grid[i][j]=dfs(grid,i,j);
             }
         }
@@ -16,7 +27,6 @@ class Solution {
         }
         return max;
     }
-
     private int dfs(int[][] a,int i,int j){
         if(i<0 || i>=a.length || j<0 || j>=a[0].length || a[i][j]!=1) return 0;
 
