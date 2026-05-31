@@ -5,7 +5,10 @@ class Solution {
             if(!map.containsKey(nums[i])) map.put(nums[i],1);
             else map.put(nums[i],map.get(nums[i])+1);
         }
-        List<Integer>[] bucket = new List[nums.length + 1];
+        int max=0;
+        for(int x: map.values())
+            max=Math.max(max,x);
+        List<Integer>[] bucket = new List[max+1];
         for(int i=0;i<bucket.length;i++){
             bucket[i]=new ArrayList<>();
         }
