@@ -6,7 +6,7 @@ class Solution {
             list.add(l);
         }
         for(int i=0;i<prerequisites.length;i++){
-            list.get(prerequisites[i][0]).add(prerequisites[i][1]);
+            list.get(prerequisites[i][1]).add(prerequisites[i][0]);
         }
         int[] visited=new int[numCourses];
         for(int i=0;i<numCourses;i++){
