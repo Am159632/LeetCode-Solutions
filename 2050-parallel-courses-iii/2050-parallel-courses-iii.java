@@ -46,7 +46,6 @@ public class Solution {
             }
         }
         
-        
         // 4. The final answer is the overall maximum time taken by any course sequence
         int totalMinTime = 0;
         for (int i = 1; i <= n; i++) {
