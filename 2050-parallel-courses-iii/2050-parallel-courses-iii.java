@@ -28,12 +28,9 @@ public class Solution {
             }
         }
         
-        int visitedCount = 0;
-        
         // 3. Process the graph using Kahn's Algorithm (Topological Sort BFS)
         while (!queue.isEmpty()) {
             int u = queue.poll();
-            visitedCount++;
             
             // Traverse all courses that depend on the current course 'u'
             for (int v : adj.get(u)) {
@@ -49,10 +46,6 @@ public class Solution {
             }
         }
         
-        // If we haven't visited all nodes, a cycle exists in the graph (not a DAG)
-        if (visitedCount < n) {
-            return -1; 
-        }
         
         // 4. The final answer is the overall maximum time taken by any course sequence
         int totalMinTime = 0;
