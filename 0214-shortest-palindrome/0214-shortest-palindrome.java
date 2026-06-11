@@ -4,33 +4,42 @@ class Solution {
             return s;
         }
         
-        String reversed = new StringBuilder(s).reverse().toString();
-        String combined = s + "#" + reversed;
-        int[] pi = buildPiArray(combined);
+        char[] chars = s.toCharArray();
+        int n = chars.length;
         
-        int longestPalindromicPrefixLength = pi[combined.length() - 1];
-        String suffixToAdd = reversed.substring(0, s.length() - longestPalindromicPrefixLength);
-        
-        return suffixToAdd + s;
-    }
-    
-    private int[] buildPiArray(String str) {
-        int n = str.length();
-        int[] pi = new int[n];
         int j = 0;
+        int[] pi = new int[n];
         
         for (int i = 1; i < n; i++) {
-            while (j > 0 && str.charAt(i) != str.charAt(j)) {
+            while (j > 0 && chars[i] != chars[j]) {
                 j = pi[j - 1];
             }
-            
-            if (str.charAt(i) == str.charAt(j)) {
+            if (chars[i] == chars[j]) {
                 j++;
             }
-            
             pi[i] = j;
         }
         
-        return pi;
+        int matched = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            while (matched > 0 && chars[i] != chars[matched]) {
+                matched = pi[matched - 1];
+            }
+            if (chars[i] == chars[matched]) {
+                matched++;
+            }
+        }
+        
+        if (matched == n) {
+            return s;
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        for (int i = n - 1; i >= matched; i--) {
+            sb.append(chars[i]);
+        }
+        sb.append(s);
+        
+        return sb.toString();
     }
 }
