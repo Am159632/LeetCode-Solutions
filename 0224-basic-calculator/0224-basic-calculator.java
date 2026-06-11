@@ -1,23 +1,25 @@
-import java.util.Stack;
-
 class Solution {
     public int calculate(String s) {
         if (s == null || s.length() == 0) {
             return 0;
         }
         
-        Stack<Integer> stack = new Stack<>();
+        char[] chars = s.toCharArray();
+        int n = chars.length;
+        
+        int[] stack = new int[n];
+        int top = 0;
+        
         int result = 0;
         int sign = 1;
-        int n = s.length();
         
         for (int i = 0; i < n; i++) {
-            char c = s.charAt(i);
+            char c = chars[i];
             
-            if (Character.isDigit(c)) {
+            if (c >= '0' && c <= '9') {
                 int num = c - '0';
-                while (i + 1 < n && Character.isDigit(s.charAt(i + 1))) {
-                    num = num * 10 + (s.charAt(i + 1) - '0');
+                while (i + 1 < n && chars[i + 1] >= '0' && chars[i + 1] <= '9') {
+                    num = num * 10 + (chars[i + 1] - '0');
                     i++;
                 }
                 result += num * sign;
@@ -26,13 +28,13 @@ class Solution {
             } else if (c == '-') {
                 sign = -1;
             } else if (c == '(') {
-                stack.push(result);
-                stack.push(sign);
+                stack[top++] = result;
+                stack[top++] = sign;
                 result = 0;
                 sign = 1;
             } else if (c == ')') {
-                result *= stack.pop();
-                result += stack.pop();
+                result *= stack[--top];
+                result += stack[--top];
             }
         }
         
